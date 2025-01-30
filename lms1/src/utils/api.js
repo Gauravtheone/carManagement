@@ -2,13 +2,13 @@ import axios from "axios";
 
 // Set default base URL
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://carmanagement-zui1.onrender.com/api",
   withCredentials: true, // Important for sending cookies
 });
 
 // Login
 export const getCarById = async (id) => {
-  return await axios.get(`http://localhost:5000/api/cars/${id}`, {
+  return await axios.get(`https://carmanagement-zui1.onrender.com/api/cars/${id}`, {
     withCredentials: true,
   });
 };
