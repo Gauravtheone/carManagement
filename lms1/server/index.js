@@ -26,7 +26,7 @@ app.use(
 
 app.use(
   cors({
-      origin:"http://localhost:3000",credentials: true
+      origin:"https://car-management-l65a.vercel.app/",credentials: true
   })
 )
 
