@@ -63,7 +63,7 @@ const EditCar = () => {
     setUploading(true);
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/cars/upload",
+        "https://carmanagement-zui1.onrender.com/api/cars/upload",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
