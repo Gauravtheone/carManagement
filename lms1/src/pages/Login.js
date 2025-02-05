@@ -24,7 +24,7 @@ console.log(message);
 console.log(token);
 console.log(email);
 console.log(name);
-      localStorage.setItem("token", token); // Save token to localStorage 
+localStorage.setItem("token", JSON.stringify(result.data.token))
       localStorage.setItem("user",JSON.stringify(result.data.user)); // Save token to localStorage 
     setUser(result.data.user)
     } catch (error) {
