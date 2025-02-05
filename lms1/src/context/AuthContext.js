@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-// import { checkAuth } from "../utils/api"; // Assuming checkAuth verifies token validity
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -7,7 +6,6 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  // const navigate = useNavigate(); // Declare useNavigate outside useEffect
 
   useEffect(() => {
     const verifyUser = async () => {
@@ -18,13 +16,15 @@ export const AuthProvider = ({ children }) => {
       }
 
       try {
-        // const userData = await checkAuth(token); // API call to verify token
-        console.log(token)
-        const userData = localStorage.getItem('user');
-        console.log("YELOOOOO")
-        console.log(userData)
-        setUser(userData); // Set user if authenticated
-        // navigate("/dashboard"); // Redirect to dashboard
+        // Parse user from localStorage
+        const storedUser = localStorage.getItem("user");
+        const userData = storedUser ? JSON.parse(storedUser) : null; // ✅ Parse JSON string
+
+        if (userData) {
+          setUser(userData); // Set user if it exists
+        } else {
+          localStorage.removeItem("token"); // Remove token if userData is invalid
+        }
       } catch (error) {
         console.error("Authentication failed", error);
         localStorage.removeItem("token"); // Remove invalid token
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     verifyUser();
-  }, []); // Add navigate as a dependency
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, setUser, loading }}>
