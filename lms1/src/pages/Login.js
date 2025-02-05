@@ -17,10 +17,16 @@ const Login = () => {
 
   const handleLogin = async (formData) => {
     try {
-      const { data } = await login(formData);
-      setUser(data.user); // Update user state
-      localStorage.setItem("token", data.token); // Save token to localStorage
-      navigate("/dashboard");
+      const result = await login(formData);
+      const {message,token} = result.data;
+      const {email,name} = result.data.user
+console.log(message);
+console.log(token);
+console.log(email);
+console.log(name);
+      localStorage.setItem("token", token); // Save token to localStorage 
+      localStorage.setItem("user",JSON.stringify(result.data.user)); // Save token to localStorage 
+    setUser(result.data.user)
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");
     }
