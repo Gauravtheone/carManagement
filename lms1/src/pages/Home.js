@@ -7,13 +7,6 @@ const Home = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  // Redirect to dashboard if user is already logged in
-  useEffect(() => {
-    if (user) {
-      navigate("/dashboard");
-    }
-  }, [user, navigate]);
-
   return (
     <Box
       display="flex"
@@ -27,24 +20,36 @@ const Home = () => {
       <Typography variant="h3" gutterBottom>
         Car Management System
       </Typography>
-      <Box display="flex" gap={2}>
+
+      {user ? (
         <Button
           variant="contained"
           color="primary"
-          onClick={() => navigate("/login")}
+          onClick={() => navigate("/dashboard")}
           sx={{ padding: "10px 20px" }}
         >
-          Login
+          Go to Dashboard
         </Button>
-        <Button
-          variant="contained"
-          color="success"
-          onClick={() => navigate("/signup")}
-          sx={{ padding: "10px 20px" }}
-        >
-          Signup
-        </Button>
-      </Box>
+      ) : (
+        <Box display="flex" gap={2}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => navigate("/login")}
+            sx={{ padding: "10px 20px" }}
+          >
+            Login
+          </Button>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => navigate("/signup")}
+            sx={{ padding: "10px 20px" }}
+          >
+            Signup
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 };
