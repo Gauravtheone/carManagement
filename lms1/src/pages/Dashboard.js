@@ -20,6 +20,7 @@ const Dashboard = () => {
         const response = await getCars();
         setCars(response.data);
         setFilteredCars(response.data);
+        console.log(response)
       } catch (error) {
         console.error("Error fetching cars", error);
       }
@@ -42,6 +43,13 @@ const Dashboard = () => {
           Add Car
         </Button>
       
+
+        <Button variant="contained" color="primary" onClick={() => navigate("/")}>
+         Go To Home
+        </Button>
+
+
+
       </Box>
 
       {/* Cars Grid */}
@@ -64,11 +72,12 @@ const Dashboard = () => {
         sx={{ mt: 3 }}
         onClick={() => {
           localStorage.removeItem("token"); 
+          localStorage.removeItem("user"); 
           setUser(null);
           navigate("/login");
         }}
       >
-        Logout
+        Logo ut
       </Button>
     </Box>
   );
